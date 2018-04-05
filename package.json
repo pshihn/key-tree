@@ -2,8 +2,14 @@
   "name": "key-tree",
   "version": "0.0.1",
   "description": "Simple keyed tree data structure",
-  "main": "index.js",
+  "main": "dist/key-tree.umd.js",
+  "jsnext:main": "index.js",
   "scripts": {
+    "build": "npm run build-d && npm run build-umd",
+    "build-d": "rollup index.js --o dist/key-tree.js --f iife --name \"KeyTree\" && npm run minify-d",
+    "minify-d": "babel-minify dist/key-tree.js -o dist/key-tree.min.js --mangle",
+    "build-umd": "rollup index.js --o dist/key-tree.umd.js --f umd --name \"KeyTree\" && npm run minify-umd",
+    "minify-umd": "babel-minify dist/key-tree.umd.js -o dist/key-tree.umd.min.js --mangle",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +21,10 @@
   "bugs": {
     "url": "https://github.com/pshihn/key-tree/issues"
   },
-  "homepage": "https://github.com/pshihn/key-tree#readme"
+  "homepage": "https://github.com/pshihn/key-tree#readme",
+  "devDependencies": {
+    "babel-minify": "^0.3.0",
+    "jest": "^22.4.3",
+    "rollup": "^0.57.1"
+  }
 }
