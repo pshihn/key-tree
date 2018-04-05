@@ -1,0 +1,19 @@
+{
+  "name": "key-tree",
+  "version": "0.0.1",
+  "description": "Simple keyed tree data structure",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pshihn/key-tree.git"
+  },
+  "author": "Preet Shihn <preetshihn@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pshihn/key-tree/issues"
+  },
+  "homepage": "https://github.com/pshihn/key-tree#readme"
+}
