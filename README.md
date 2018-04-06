@@ -56,3 +56,30 @@ let tree = new KeyTree(null, {
   'cars.models': ['sedan', 'suv']
 })
 ```
+
+### get(keyPath)
+Returns an arrays of values at the specified keyPath. An empty array is returned if there are no values.
+
+### getSub(keyPath [, grouped])
+Returns all the values at the specified key path and the values of all the children of that node.
+By default, the result is a combined array.
+
+if _grouped_ is specified and is set to true, the result is an object grouped by various key paths.
+
+### remove(keyPath, value)
+Removes the specified value from the specified keyPath.
+Returns _true_ if value existed and was removed.
+
+### removeKey(keyPath)
+Removes the node at the specified keyPath and all its children.
+Returns _true_ if there was a node at the path
+
+### removeChildren(keyPath)
+Remove all the children of a node. 
+
+### clearKey(keyPath [, clearChildren])
+Clear all the values associated with the specified keyPath. 
+Optionally, if _clearChildren_ is set to true, all the children values are also cleared.
+
+## License
+[MIT License](https://github.com/pshihn/key-tree/blob/master/LICENSE) (c) [Preet Shihn](https://twitter.com/preetster)
