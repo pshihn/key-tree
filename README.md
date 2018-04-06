@@ -14,7 +14,7 @@ tree.add('cars.models.colors', ['red', 'green', 'blue']);
 tree.add('cars.models', ['sedan', 'suv']);
 ```
 
-You can get all values unde a node or specific values at that node
+You can get specific values at the node or all the values under the node (all children).
 ``` javascript
 tree.get('cars.models'); // ['sedan', 'suv']
 tree.getSub('cars.models'); // ['sedan', 'suv', 'red', 'green', 'blue']
@@ -22,7 +22,7 @@ tree.getSub('cars.models'); // ['sedan', 'suv', 'red', 'green', 'blue']
 
 ### Example use case
 
-I recently used this to map a series of observer callbacks. So if *_a.b.c_* is modified then invoke the appropriate callbacks. But if *_a.b_* is modified, invoke callbacks associated with _a.b_, _a.b.c_, _a.b.d_.
+I recently used this to map a set of observer callbacks. So if *_a.b.c_* is modified then invoke the appropriate callbacks. But if *_a.b_* is modified, invoke callbacks associated with _a.b_, _a.b.c_, _a.b.d_.
 
 
 ## Install
@@ -36,7 +36,7 @@ npm install --save key-tree
 
 ## API
 
-This defined a KeyTree class
+This defines a KeyTree class
 
 ### constructor([options, values])
 Basic tree
@@ -57,8 +57,17 @@ let tree = new KeyTree(null, {
 })
 ```
 
+### add(keyPath, value)
+Add value(s) to the node at the specified keyPath.
+_value_ can be a single object or an array of objects.
+
+```js
+tree.add('cars.models', 'sedan');
+tree.add('cars.models', ['suv', 'atv'];
+```
+
 ### get(keyPath)
-Returns an arrays of values at the specified keyPath. An empty array is returned if there are no values.
+Returns an array of values at the specified keyPath. An empty array is returned if there are no values.
 
 ### getSub(keyPath [, grouped])
 Returns all the values at the specified key path and the values of all the children of that node.
@@ -78,7 +87,7 @@ Returns _true_ if there was a node at the path
 Remove all the children of a node. 
 
 ### clearKey(keyPath [, clearChildren])
-Clear all the values associated with the specified keyPath. 
+Clear all the values associated with the specified node. 
 Optionally, if _clearChildren_ is set to true, all the children values are also cleared.
 
 ## License
