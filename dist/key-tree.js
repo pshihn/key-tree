@@ -18,7 +18,7 @@ var KeyTree = (function () {
     getChild(key) {
       for (const c of this.children) {
         if (key === c.key) {
-          return key;
+          return c;
         }
       }
       return null;
@@ -67,7 +67,7 @@ var KeyTree = (function () {
       }
       let subKeys = (key || '').trim().split(this.sep);
       for (let i = 0; i < subKeys.length; i++) {
-        if (i < (subKeys.length - 1)) {
+        if (i === (subKeys.length - 1)) {
           current = current.addChild(subKeys[i], values);
         } else {
           current = current.ensureChild(subKeys[i]);
