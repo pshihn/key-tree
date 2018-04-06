@@ -90,7 +90,7 @@ var KeyTree = (function () {
     }
 
     get(key) {
-      let node = this._getNode(key);
+      const node = this._getNode(key);
       return node ? node.values : [];
     }
 
@@ -109,6 +109,80 @@ var KeyTree = (function () {
       for (const c of node.children) {
         let ckey = `${keyPath}${this.sep}${c.key}`;
         this._subChildren(ckey, c, result);
+      }
+    }
+
+    remove(key, value) {
+      const node = this._getNode(key);
+      let ret = false;
+      if (node) {
+        while (true) {
+          let ix = -1;
+          for (let i = 0; i < node.values.length; i++) {
+            if (node.values[i] == value) {
+              ix = i;
+              break;
+            }
+          }
+          if (ix >= 0) {
+            node.values.splice(ix, 1);
+            ret = true;
+          } else {
+            break;
+          }
+        }
+      }
+      return ret;
+    }
+
+    removeKey(key) {
+      if (key) {
+        const node = this._getNode(key);
+        let ret = false;
+        if (node) {
+          ret = true;
+          const parent = node.parent;
+          let ix = -1;
+          for (let i = 0; i < parent.children.length; i++) {
+            let c = parent.children[i];
+            if (c == node) {
+              ix = i;
+              break;
+            }
+          }
+          if (ix >= 0) {
+            parent.children.splice(ix, 1);
+          }
+        }
+        return ret;
+      } else {
+        throw 'Cannot remove the root key';
+      }
+    }
+
+    removeChildren(key) {
+      let ret = false;
+      const node = this._getNode(key);
+      if (node) {
+        node.removeAllChildren();
+        ret = true;
+      }
+      return ret;
+    }
+
+    clearKey(key, clearChildren) {
+      const node = this._getNode(key);
+      if (node) {
+        this._clearNodeValues(node, clearChildren);
+      }
+    }
+
+    _clearNodeValues(node, clearChildren) {
+      node.clearValues();
+      if (clearChildren) {
+        for (const c of node.children) {
+          this._clearNodeValues(c, clearChildren);
+        }
       }
     }
   }

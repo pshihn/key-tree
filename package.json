@@ -10,7 +10,8 @@
     "minify-d": "babel-minify dist/key-tree.js -o dist/key-tree.min.js --mangle",
     "build-umd": "rollup index.js --o dist/key-tree.umd.js --f umd --name \"KeyTree\" && npm run minify-umd",
     "minify-umd": "babel-minify dist/key-tree.umd.js -o dist/key-tree.umd.min.js --mangle",
-    "test": "jest"
+    "test": "jest",
+    "buildtest": "npm run build && jest"
   },
   "repository": {
     "type": "git",
