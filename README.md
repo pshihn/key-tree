@@ -38,7 +38,7 @@ npm install --save key-tree
 
 This defines a KeyTree class
 
-#### constructor([options, values])
+### constructor([options, values])
 Basic tree
 ```js
 const tree = new KeyTree();
@@ -57,7 +57,7 @@ let tree = new KeyTree(null, {
 })
 ```
 
-#### add(keyPath, value)
+### add(keyPath, value)
 Add value(s) to the node at the specified keyPath.
 _value_ can be a single object or an array of objects.
 
