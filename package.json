@@ -1,6 +1,6 @@
 {
   "name": "key-tree",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple keyed tree data structure",
   "main": "dist/key-tree.umd.js",
   "jsnext:main": "index.js",
@@ -17,6 +17,16 @@
     "type": "git",
     "url": "git+https://github.com/pshihn/key-tree.git"
   },
+  "keywords": [
+    "hash-tree",
+    "key-tree",
+    "hash tree",
+    "key tree",
+    "keyed tree",
+    "keyed-tree",
+    "datastructure",
+    "tree"
+  ],
   "author": "Preet Shihn <preetshihn@gmail.com>",
   "license": "MIT",
   "bugs": {
