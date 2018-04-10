@@ -9,6 +9,15 @@ var KeyTree = (function () {
       this.parent = parent;
       this.appendValues(values);
     }
+    get fullPath() {
+      let ret = [];
+      let current = this;
+      while (current) {
+        ret.splice(0, 0, current.key);
+        current = current.parent;
+      }
+      return ret;
+    }
     getChild(key) {
       for (const c of this.children) {
         if (key === c.key) {
@@ -90,19 +99,31 @@ var KeyTree = (function () {
 
     getSub(key, grouped) {
       let result = { grouped: {}, ungrouped: [] };
-      this._subChildren(key, this._getNode(key), result);
+      this._reduce(key, this._getNode(key), result, true);
       return grouped ? result.grouped : result.ungrouped;
     }
 
-    _subChildren(keyPath, node, result) {
-      if (!node) {
-        return;
-      }
+    getSup(key, grouped) {
+      let result = { grouped: {}, ungrouped: [] };
+      this._reduce(key, this._getNode(key), result, false);
+      return grouped ? result.grouped : result.ungrouped;
+    }
+
+    _reduce(keyPath, node, result, isSub) {
+      if (!node) return;
       result.grouped[keyPath] = node.values;
       result.ungrouped = result.ungrouped.concat(node.values);
-      for (const c of node.children) {
-        let ckey = `${keyPath}${this.sep}${c.key}`;
-        this._subChildren(ckey, c, result);
+      if (isSub) {
+        for (const c of node.children) {
+          const ckey = `${keyPath}${this.sep}${c.key}`;
+          this._reduce(ckey, c, result, isSub);
+        }
+      } else {
+        const parent = node.parent;
+        if (parent) {
+          const pkey = parent.fullPath.join(this.sep);
+          this._reduce(pkey, parent, result, isSub);
+        }
       }
     }
 

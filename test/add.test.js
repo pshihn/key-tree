@@ -106,3 +106,33 @@ test('Alt separator test', () => {
   expect(carSub).toContain(2001);
   expect(carSub).toContain(2005);
 });
+
+test('GetSup test', () => {
+  const tree = new KeyTree();
+  tree.add('cars', ['toyota', 'bmw', 'honda', 'merc']);
+  tree.add('animals', 'dogs');
+  tree.add('cars.models', ['sedan', 'suv']);
+  tree.add('cars.years', [2001, 2002]);
+  tree.add('cars.models.colors', ['red', 'green', 'blue']);
+
+  let cars = tree.get('cars');
+  expect(cars.length).toBe(4);
+  let models = tree.get('cars.models');
+  expect(models.length).toBe(2);
+  let colors = tree.get('cars.models.colors');
+  expect(colors.length).toBe(3);
+
+  cars = tree.getSup('cars');
+  expect(cars.length).toBe(4);
+
+  models = tree.getSup('cars.models');
+  expect(models.length).toBe(6);
+  expect(models).toContain('sedan');
+  expect(models).toContain('bmw');
+
+  colors = tree.getSup('cars.models.colors');
+  expect(colors.length).toBe(9);
+  expect(colors).toContain('honda');
+  expect(colors).toContain('suv');
+  expect(colors).toContain('red');
+});
