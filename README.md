@@ -1,6 +1,6 @@
 # key-tree 🔑🌲
 * Simple keyed tree data structure
-* 850 bytes gzipped
+* 831 bytes gzipped
 
 ## Usage
 
