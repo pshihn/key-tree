@@ -20,6 +20,13 @@ tree.get('cars.models'); // ['sedan', 'suv']
 tree.getSub('cars.models'); // ['sedan', 'suv', 'red', 'green', 'blue']
 ```
 
+Or get all the values of the node and all parent nodes
+``` javascript
+tree.get('cars.models'); // ['sedan', 'suv']
+tree.getSup('cars.models'); // ['sedan', 'suv', 'toyota', 'bmw', 'honda', 'ford']
+```
+
+
 ### Example use case
 
 I recently used this to map a set of observer callbacks. So if *_a.b.c_* is modified then invoke the appropriate callbacks. But if *_a.b_* is modified, invoke callbacks associated with _a.b_, _a.b.c_, _a.b.d_.
@@ -71,6 +78,12 @@ Returns an array of values at the specified keyPath. An empty array is returned 
 
 ### getSub(keyPath [, grouped])
 Returns all the values at the specified key path and the values of all the children of that node.
+By default, the result is a combined array.
+
+if _grouped_ is specified and is set to true, the result is an object grouped by various key paths.
+
+### getSup(keyPath [, grouped])
+Returns all the values at the specified key path and the values of all its parent nodes up to the root.
 By default, the result is a combined array.
 
 if _grouped_ is specified and is set to true, the result is an object grouped by various key paths.
