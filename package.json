@@ -1,6 +1,6 @@
 {
   "name": "key-tree",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple keyed tree data structure",
   "main": "dist/key-tree.umd.js",
   "jsnext:main": "index.js",

@@ -12,12 +12,6 @@
       this.parent = parent;
       this.appendValues(values);
     }
-    removeAllChildren() {
-      this.children = [];
-    }
-    clearValues() {
-      this.values = [];
-    }
     getChild(key) {
       for (const c of this.children) {
         if (key === c.key) {
@@ -164,13 +158,12 @@
     }
 
     removeChildren(key) {
-      let ret = false;
       const node = this._getNode(key);
       if (node) {
-        node.removeAllChildren();
-        ret = true;
+        node.children = [];
+        return true;
       }
-      return ret;
+      return false;
     }
 
     clearKey(key, clearChildren) {
@@ -181,7 +174,7 @@
     }
 
     _clearNodeValues(node, clearChildren) {
-      node.clearValues();
+      node.values = [];
       if (clearChildren) {
         for (const c of node.children) {
           this._clearNodeValues(c, clearChildren);
